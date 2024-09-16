@@ -24,6 +24,9 @@ class SplitCDS extends LitElement {
   loading: boolean = false;
 
   @state()
+  error: boolean = false;
+
+  @state()
   data: Awaited<ReturnType<typeof fetchData>> | null = null;
   
   updated(changedProperties: Map<string, unknown>) {
@@ -37,21 +40,31 @@ class SplitCDS extends LitElement {
       return;
     }
 
+    this.error = false;
     this.loading = true;
 
-    const data = await fetchData({
-      genomeId: this.genomeId,
-      transcriptId: this.transcriptId
-    });
-
-    this.data = data;
-    this.loading = false;
+    try {
+      const data = await fetchData({
+        genomeId: this.genomeId,
+        transcriptId: this.transcriptId
+      });
+  
+      this.data = data;
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.error = true;
+    }
   }
 
   render() {
     if (this.loading) {
       return html`
         Loading...
+      `;
+    } else if (this.error) {
+      return html`
+        Failed to fetch data
       `;
     }
     if (!this.data) {

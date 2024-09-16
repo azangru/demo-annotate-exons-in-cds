@@ -5,6 +5,16 @@ const exampleTranscripts = [
     genomeId: 'a7335667-93e7-11ec-a39d-005056b38ce3',
     transcriptId: 'ENST00000666593.2',
     note: 'Homo sapiens, BRCA2, forward strand'
+  },
+  {
+    genomeId: 'a7335667-93e7-11ec-a39d-005056b38ce3',
+    transcriptId: 'ENST00000641462.2',
+    note: 'Homo sapiens, MAPK10, reverse strand'
+  },
+  {
+    genomeId: 'a7335667-93e7-11ec-a39d-005056b38ce3',
+    transcriptId: 'ENST00000589042.5',
+    note: 'Homo sapiens, TTN, reverse strand'
   }
 ];
 
@@ -37,7 +47,7 @@ class ExampleTranscripts extends LitElement {
     const genomeId = button.dataset.genomeId;
     const transcriptId = button.dataset.transcriptId;
 
-    const outgoingEvent = new CustomEvent('click', { detail: {genomeId, transcriptId} });
+    const outgoingEvent = new CustomEvent('example-transcript-click', { detail: {genomeId, transcriptId} });
     this.dispatchEvent(outgoingEvent);
   }
 

@@ -72,7 +72,7 @@ class Playground extends LitElement {
           <h1>
             Check out an example transcript
           </h1>
-          <example-transcripts @click=${this.onTranscriptInputChange}></example-transcripts>
+          <example-transcripts @example-transcript-click=${this.onTranscriptInputChange}></example-transcripts>
         </div>
       </div>
 
